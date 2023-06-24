@@ -35,7 +35,7 @@ var originalKey = new byte[32];
 var enteredKey = ...;
 
 // The code is originally taken from System.Security.Cryptography.CryptographicOperations.FixedTimeEquals
-if (originalkey.SecureEquals(enteredKey)) {
+if (originalKey.SecureEquals(enteredKey)) {
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("Keys are the same!");
 } else {
