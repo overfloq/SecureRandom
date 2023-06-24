@@ -11,12 +11,14 @@ var secureRandom = new SecureRandom();
 // If you want, you can use SecureRandom.Shared instead of creating a new instance
 ```
 
+
 Generate a random number
 ```cs
 // Generate a cryptographically secure random integer within a specific range [5..10), which means value is higher or equal to 5 and less than 10
 int number = secureRandom.Next(5, 10);
 Console.WriteLine($"The number is {number}");
 ```
+
 
 Using extension methods
 ```cs
