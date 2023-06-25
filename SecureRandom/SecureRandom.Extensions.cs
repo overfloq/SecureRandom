@@ -36,11 +36,12 @@
         public static void Shuffle<T>(this T[] array)
             => SecureRandom.Shared.Shuffle(array);
 
+        /// <inheritdoc cref="SecureRandom.Shuffle{T}(Span{T})"/>
         public static void Shuffle<T>(this Span<T> span)
             => SecureRandom.Shared.Shuffle(span);
 
         /// <inheritdoc cref="SecureRandom.Compare(ReadOnlySpan{byte}, ReadOnlySpan{byte})"/>
-        public static void SecureEquals(this byte[] first, byte[] second)
+        public static bool SecureEquals(this byte[] first, byte[] second)
             => SecureRandom.Compare(first.AsSpan(), second.AsSpan());
 
         /// <inheritdoc cref="SecureRandom.Compare(ReadOnlySpan{byte}, ReadOnlySpan{byte})"/>

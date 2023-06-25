@@ -1,11 +1,9 @@
-﻿using System.Buffers.Binary;
+﻿using System;
+using System.Buffers.Binary;
 using System.Runtime.InteropServices;
 
 namespace Crypto.RNG
 {
-    /// <summary>
-    /// Secure random number generator provider.
-    /// </summary>
     public partial class SecureRandom
     {
         /// <summary>
@@ -227,6 +225,7 @@ namespace Crypto.RNG
         /// <summary>
         /// Random element from the sequence.
         /// </summary>
+        /// <exception cref="ArgumentException"/>
         public TSource NextElement<TSource>(TSource[] array)
             => NextElement<TSource>(array.AsSpan());
 
@@ -234,7 +233,7 @@ namespace Crypto.RNG
         public TSource NextElement<TSource>(ReadOnlySpan<TSource> span)
         {
             if (span.Length == 0)
-                throw new IndexOutOfRangeException("Span is empty");
+                throw new ArgumentException("Span is empty", nameof(span));
 
             return span[Next(span.Length)];
         }
@@ -243,7 +242,7 @@ namespace Crypto.RNG
         public TSource NextElement<TSource>(ICollection<TSource> collection)
         {
             if (collection.Count == 0)
-                throw new IndexOutOfRangeException("Collection is empty");
+                throw new ArgumentException("Collection is empty", nameof(collection));
 
             return collection.ElementAt(Next(collection.Count));
         }

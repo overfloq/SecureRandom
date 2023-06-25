@@ -5,13 +5,13 @@
         static readonly SecureRandom _shared;
 
         /// <summary>
-        /// Shared and threadsafe instance of SecureRandom
+        /// Shared instance of SecureRandom, which can be used from any place of the code
         /// </summary>
         public static new SecureRandom Shared => _shared;
 
         static SecureRandom()
         {
-            _shared = new SecureRandom();
+            _shared = new SecureRandom(false);
         }
     }
 }
