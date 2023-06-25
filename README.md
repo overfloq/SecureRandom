@@ -47,3 +47,5 @@ if (originalKey.SecureEquals(enteredKey)) {
 
 ## Don't forget to dispose the SecureRandom
 If you weren't using a shared instance, keep in mind disposing your SecureRandom instance. You can use such things, like `using (SecureRandom secureRandom = new()) { ... }`. **Don't dispose a shared instance!**
+
+*More descriptive example can be found in `Program.cs`*
