@@ -1,5 +1,7 @@
-﻿// The SecureRandom namespace
-using Crypto.RNG;
+﻿using CryptoRandom; // Namespace containing the SecureRandom class,
+                    // which provides the main functionality of generating a random numbers
+using CryptoRandom.Extensions; // Second namespace containing the extension methods,
+                               // like T[].PickRandom or List<T>.Shuffle
 
 // Allocate a new span and fill it with a random bytes
 Span<byte> key = stackalloc byte[16];
@@ -20,7 +22,7 @@ var enteredKey = new byte[32];
 enteredKey[3] = 0x03;
 
 // Write a result of a secure fixed-time array comparasion
-Console.WriteLine(originalKey.SecureEquals(enteredKey) ?
+Console.WriteLine(originalKey.FixedTimeEquals(enteredKey) ?
     "SUCCESS: Keys are matching!" : "ERROR: Keys are different.");
 
 /*   The extension methods (like Array.FillRandom) are using a shared instance of SecureRandom.
@@ -33,8 +35,12 @@ Console.WriteLine(originalKey.SecureEquals(enteredKey) ?
 
 var secureRandom = new SecureRandom();
 
-var probability = secureRandom.Probability(0.5);
-Console.WriteLine($"We have only 50% of having a chance to be following value True: '{probability}'");
+/*   Probability generates a boolean, which means a chance specified in the double/float. (0 = 0%; 1 = 100%)
+ *   In this example, 0.2 is 20% - we actually have a 20% chance of result being True; otherwise it'll be False.
+ */
+
+var probability = secureRandom.Probability(0.2);
+Console.WriteLine($"Probability result: '{probability}'");
 
 /*
  *   Dispose the created instance, NOT shared instance. Disposing will destroy the source even, if we passed it
@@ -57,7 +63,7 @@ secureRandom.NextBytes(newArray);
  *   If we do the same with numbers, output will be the lowest possible value.
  */
 
-Console.WriteLine($"Output from disposed SecureRandom : {Convert.ToBase64String(newArray)}");
+Console.WriteLine($"\nOutput from disposed SecureRandom : {Convert.ToBase64String(newArray)}");
 Console.WriteLine($"Also a number [-10..10)           : {secureRandom.Next(-10, 10)}");
 
 /*   SecureRandom.Shared.Dispose();
