@@ -35,13 +35,15 @@ var enteredKey = ...;
 
 // This code is using System.Security.Cryptography.CryptographicOperations.FixedTimeEquals
 if (originalKey.SecureEquals(enteredKey)) {
+    // The arrays are the same length and contains exactly the same values!
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("Keys are the same!");
 } else {
+    // The arrays are different by it's length or values.
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("Sorry, but the keys aren't equal.");
 }
 ```
 
 ## Don't forget to dispose the SecureRandom
-If you weren't using a shared instance, keep in mind disposing your SecureRandom instance. You can use such things, like `using (SecureRandom secureRandom = new()) { ... }`. **Do not dispose shared instance. If you do that, an InvalidOperationExecption will be thrown!**
+If you weren't using a shared instance, keep in mind disposing your SecureRandom instance. You can use such things, like `using (SecureRandom secureRandom = new()) { ... }`. **Don't dispose a shared instance!**
