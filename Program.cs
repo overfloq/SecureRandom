@@ -2,7 +2,6 @@
                     // which provides the main functionality of generating a random numbers
 using CryptoRandom.Extensions; // Second namespace containing the extension methods,
                                // like T[].PickRandom or List<T>.Shuffle
-
 // Allocate a new span and fill it with a random bytes
 Span<byte> key = stackalloc byte[16];
 key.FillRandom();
